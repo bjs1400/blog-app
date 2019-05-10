@@ -1,2 +1,2 @@
 # blog-app
-Blog Application
+Blog Application using Meteor, React, React Router, and semantic-ui
