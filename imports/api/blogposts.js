@@ -14,6 +14,9 @@ Meteor.publish("posts", function postsPublication() {
 // methods
 if (Meteor.isServer) {
   Meteor.methods({
+    "posts.fetch"() {
+      return Posts.find().fetch();
+    },
     "posts.insert"(data) {
       check(data.title, String);
       check(data.description, String);
@@ -35,17 +38,33 @@ if (Meteor.isServer) {
 
       history.push("/blog"); // send user to blog list upon successful creation
     },
-    "posts.delete"(data) {
-      if (!this.userId) {
-        throw new Meteor.Error("not-authorized");
-      }
-      Posts.remove({ id: data.id }); // ???
+    "post.fetch"(postId) {
+      const post = Posts.find({
+        _id: postId
+      }).fetch();
+      return post;
     },
-    "posts.edit"(data) {
+    "post.delete"(postId) {
+      if (!this.userId) {
+        // make sure user is an admin before deleting!
+        throw new Meteor.Error("not-authorized");
+      }
+      Posts.remove({ _id: postId }); // ???
+    },
+    "posts.update"(post) {
       if (!this.userId) {
         throw new Meteor.Error("not-authorized");
       }
-      Posts.update({ title: data.title, description: data.description });
+
+      Posts.update(
+        { _id: post.id },
+        {
+          $set: {
+            title: post.title,
+            description: post.description
+          }
+        }
+      );
     }
   });
 }

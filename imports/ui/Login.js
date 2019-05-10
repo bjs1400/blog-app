@@ -29,7 +29,7 @@ class Login extends React.Component {
           <h2 className="ui image header">
             <div className="content">Log-in to your account</div>
           </h2>
-          <form className="ui large form">
+          <form onSubmit={this.handleSubmit} className="ui large form">
             <div className="ui stacked segment">
               <div className="field">
                 <div className="ui left icon input">

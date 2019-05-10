@@ -19,11 +19,11 @@ class BlogCreate extends Component {
 
   // only rendered if user is an admin
   render() {
-    if (this.props.isAdmin) {
+    if (Roles.userIsInRole(Meteor.user(), ["admin"])) {
       return (
         <form className="new-post" onSubmit={this.handleSubmit}>
-          <input ref="title" />
-          <input ref="description" />
+          <input type="text" ref="title" />
+          <input type="text" ref="description" />
         </form>
       );
     } else {

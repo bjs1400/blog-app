@@ -19,9 +19,9 @@ class App extends Component {
             <Route path="/signup" component={Signup} /> :)
             <Router path="/login" component={Login} />
             <Router path="/blog" component={Blog} />
-            <Router path="/blog/:id" component={Blog} />
+            <Router path="/blog/:id" component={BlogShow} />
             <Router path="/post/new" component={BlogCreate} />
-            <Router path="/post/edit" component={BlogEdit} />
+            <Router path="/post/edit/:id" component={BlogEdit} />
             <Router path="/admin/user" component={AllUsers} />
           </div>
         </Router>
