@@ -7,9 +7,11 @@ import history from "../history";
 
 export const Users = new Mongo.Collection("users");
 
-Meteor.publish("users", function usersPublication() {
-  return Users.find().fetch();
-});
+if (Meteor.isServer) {
+  Meteor.publish("users", function usersPublication() {
+    return Users.find().fetch();
+  });
+}
 
 if (Meteor.isServer) {
   Meteor.methods({
@@ -21,7 +23,7 @@ if (Meteor.isServer) {
         password: data.password,
         currentUser: Meteor.userId() // need to figure out how to determine if admin!
       });
-      Roles.addUsersToRoles()
+      Roles.addUsersToRoles();
 
       history.push("/blog"); // after user successfully signs up, send them to blog list page
     },

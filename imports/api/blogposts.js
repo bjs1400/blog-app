@@ -23,11 +23,8 @@ if (Meteor.isServer) {
       // if user is not logged in, throw error
       if (!this.userId) {
         throw new Meteor.Error("not-authorized");
-      } else if (
-        !{
-          /*user not admin*/
-        }
-      ) {
+      } else if (!Roles.userIsInRole(Meteor.user(), ["admin"])) {
+        // if user is not an admin
         throw new Meteor.Error("not-authorized"); // cannot create new post unless an admin
       }
 
@@ -45,26 +42,30 @@ if (Meteor.isServer) {
       return post;
     },
     "post.delete"(postId) {
-      if (!this.userId) {
+      if (!this.userId || !Roles.userIsInRole(Meteor.user(), ["admin"])) {
         // make sure user is an admin before deleting!
         throw new Meteor.Error("not-authorized");
+      } else {
+        Posts.remove({ _id: postId });
+        history.push("/blog");
       }
-      Posts.remove({ _id: postId }); // ???
+      // ???
     },
     "posts.update"(post) {
       if (!this.userId) {
         throw new Meteor.Error("not-authorized");
-      }
-
-      Posts.update(
-        { _id: post.id },
-        {
-          $set: {
-            title: post.title,
-            description: post.description
+      } else {
+        Posts.update(
+          { _id: post.id },
+          {
+            $set: {
+              title: post.title,
+              description: post.description
+            }
           }
-        }
-      );
+        );
+        history.push("/blog");
+      }
     }
   });
 }

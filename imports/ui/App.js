@@ -9,6 +9,7 @@ import BlogCreate from "./BlogCreate";
 import BlogEdit from "./BlogEdit";
 import BlogShow from "./BlogShow";
 import AllUsers from "./AllUsers";
+import ErrorPage from "./ErrorPage";
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
             <Router path="/post/new" component={BlogCreate} />
             <Router path="/post/edit/:id" component={BlogEdit} />
             <Router path="/admin/user" component={AllUsers} />
+            <Router path="/errorPage" component={ErrorPage} />
           </div>
         </Router>
       </div>

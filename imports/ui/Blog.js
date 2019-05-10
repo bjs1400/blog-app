@@ -23,8 +23,7 @@ class Blog extends Component {
     user: null
   };
 
-  componentDidMount() {
-    // WHICH METHOD?!?!
+  componentWillMount() {
     this.fetchPosts();
   }
 

@@ -10,19 +10,29 @@ import { Meteor } from "meteor/meteor";
 import users from "../api/users";
 
 class Bar extends React.Component {
-  componentDidMount() {
-    Meteor.call("users.fetch"); // **FIX THIS **
+  state = {
+    user: null
+  };
+
+  componentWillMount() {
+    const user = Meteor.call("user.fetch", Meteor.userId()); // **FIX THIS **
+    this.setState({});
   }
 
   render() {
-    return (
-      <div class="ui fixed inverted menu">
-        <div class="ui container">
-          {this.props.users.currentUser ? <LogoutButton /> : <LoginButton />}
+    if (!notAvail) {
+      return (
+        <div className="ui fixed inverted menu">
+          <div className="ui container">
+            {this.props.users.currentUser ? <LogoutButton /> : <LoginButton />}
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
-export default Bar; // subscribe to sign in status
+export default withTracker(() => {
+  const usersSub = Meteor.subscribe("users");
+  const notAvail = !usersSub.ready();
+})(AllUsers);

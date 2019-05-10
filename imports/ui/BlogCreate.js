@@ -9,9 +9,9 @@ class BlogCreate extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const title = ReactDOM.findDOMNode(this.refs.title).value.trim();
+    const title = ReactDOM.findDOMNode(this.refs.createTitle).value.trim();
     const description = ReactDOM.findDOMNode(
-      this.refs.description
+      this.refs.createDescription
     ).value.trim();
     // call create blog post method
     Meteor.call("posts.insert", { title, description });
@@ -22,8 +22,8 @@ class BlogCreate extends Component {
     if (Roles.userIsInRole(Meteor.user(), ["admin"])) {
       return (
         <form className="new-post" onSubmit={this.handleSubmit}>
-          <input type="text" ref="title" />
-          <input type="text" ref="description" />
+          <input type="text" ref="createTitle" />
+          <input type="text" ref="createDescription" />
         </form>
       );
     } else {

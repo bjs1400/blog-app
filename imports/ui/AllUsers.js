@@ -26,6 +26,9 @@ class AllUsers extends React.Component {
   };
 
   render() {
+    if (loading) {
+      return <div>Loading...</div>;
+    }
     // if admin, render list. otherwise, access denied.
     if (Roles.userIsInRole(Meteor.user(), ["admin"])) {
       return <div className="ui relaxed divided list">{this.renderList()}</div>;
@@ -35,4 +38,7 @@ class AllUsers extends React.Component {
   }
 }
 
-export default AllUsers;
+export default withTracker(() => {
+  const usersSub = Meteor.subscribe("users");
+  const loading = !usersSub.ready();
+})(AllUsers);
