@@ -31,7 +31,7 @@ class RenderItem extends React.Component {
   render() {
     return (
       <div class="item">
-        {this.renderAdmin(this.props.id)}
+        {this.renderAdmin(this.props.blogid)}
         {/* ADD ID AS A KEY! */}
         <div class="content">
           <Link to={`/blog/${this.props.blogId}`} class="header">

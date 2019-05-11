@@ -29,7 +29,7 @@ class Blog extends Component {
 
   fetchPosts = () => {
     // fetch our blog posts
-    Meteor.call("posts.fetch", (err, res) => {
+    Meteor.call("posts.fetch", (err, result) => {
       if (err) {
         history.push("/errorPage");
       } else {
@@ -41,7 +41,7 @@ class Blog extends Component {
   renderList = () => {
     return this.state.posts.map(post => (
       <RenderItem
-        id={post._id}
+        blogId={post._id}
         title={post.title}
         description={post.description}
       />
@@ -50,8 +50,7 @@ class Blog extends Component {
 
   renderCreate = () => {
     // Create new post button
-    if (this.props.users.isAdmin) {
-      // FIX THIS AHHHH
+    if (Roles.userIsInRole(Meteor.user(), ["admin"])) {
       return (
         <div style={{ textAlign: "right" }}>
           <Link to={"/post/new"} className="ui button primary">
