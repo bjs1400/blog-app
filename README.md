@@ -7,10 +7,10 @@ This app allows users to login, signup, view blog posts if they are signed in, a
 
 Functionality is provided for the following routes:
 
-/login
-/signup 
-/blog 
-/blog/:id 
-/post/new 
-/post/edit/:id 
+/login,
+/signup, 
+/blog, 
+/blog/:id, 
+/post/new, 
+/post/edit/:id, 
 /admin/user 
