@@ -7,10 +7,10 @@ This app allows users to login, signup, view blog posts if they are signed in, a
 
 Functionality is provided for the following routes:
 
-/login -- user login
-/signup -- user signup
-/blog -- access the list of current blog posts in the database
-/blog/:id -- access a specific blog post
-/post/new -- admin may create a new post
-/post/edit/:id -- admin can edit a specific post
-/admin/user -- admin can access the list of current users in the system 
+/login
+/signup 
+/blog 
+/blog/:id 
+/post/new 
+/post/edit/:id 
+/admin/user 
