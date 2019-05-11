@@ -11,15 +11,19 @@ class BlogEdit extends Component {
     description: " "
   };
   //fetch the blog post containing the id in params & set that in a state title & description
-  componentDidMount() {
-    Meteor.call("post.fetch", params.id.something, (err, result) => {
-      // ** FIX THIS params thing
+  componentWillMount() {
+    this.fetchPost();
+  }
+
+  fetchPost = () => {
+    blogId = this.props.match.params.id;
+    Meteor.call("post.fetch", blogId, (err, result) => {
       this.setState({
         title: result.title,
         description: result.description
       });
     });
-  }
+  };
 
   handleSubmit = event => {
     event.preventDefault();
